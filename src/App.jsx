@@ -18,10 +18,10 @@ const App = () => {
         <Route path="/" exact>
           <Home />
         </Route>
-        <Route path="/users/me" exact>
+        <Route path="/profile" exact>
           <Profile />
         </Route>
-        <Route path="/users/me/modify">
+        <Route path="/profile/modify">
           <ModifyProfile />
         </Route>
         <Route path="/users/:slug">

@@ -64,14 +64,14 @@ const Profile = () => {
   return (
     <div className="container">
       <span id="title">Profile</span>
-      <div>
+      <div id="profile-container">
         <h3>Username</h3>
-        <p>{userInfo.username}</p>
+        <p className="user-p-info">{userInfo.username}</p>
         <h3>Email</h3>
-        <p>{userInfo.email}</p>
+        <p className="user-p-info">{userInfo.email}</p>
         <h3>Description</h3>
-        <p>{userInfo.description}</p>
-        <Link to="/users/me/modify">Modify</Link>
+        <p className="user-p-info">{userInfo.description}</p>
+        <Link to="/profile/modify" id="btn-modify">Modify</Link>
       </div>
       <div>
         <h3>{data && data.length} posts</h3>

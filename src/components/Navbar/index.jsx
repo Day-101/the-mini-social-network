@@ -27,7 +27,7 @@ const Navbar = () => {
           </li>
           {check ?
             <li>
-              <Link to="/users/me">Profile</Link>
+              <Link to="/profile">Profile</Link>
             </li>
             :
             <span />
