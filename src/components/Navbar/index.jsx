@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+
+  const { check } = useSelector(state => state);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -13,24 +16,38 @@ const Navbar = () => {
   };
   
   return (
-    <div>
-      <nav className="container navbar">
+    <div className="nav-container">
+      <nav className="navbar">
         <ul>
+          <li>
+            <Link to="/"><img src="logo192.png" id="brand-img" alt="" /></Link>
+          </li>
           <li>
             <Link to="/">Home</Link>
           </li>
-          <li>
-            <Link to="/users/me">Profile</Link>
-          </li>
-          <li>
-            <Link to="/register">Register</Link>
-          </li>
-          <li>
-            <Link to="/signin">Sign in</Link>
-          </li>
-          <li>
-            <Link to="#" onClick={handleClick}>Sign out</Link>
-          </li>
+          {check ?
+            <li>
+              <Link to="/users/me">Profile</Link>
+            </li>
+            :
+            <span />
+          }
+          {check ?
+            <span />
+            :
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
+          }
+          {check ?
+            <li>
+              <Link to="#" onClick={handleClick}>Sign out</Link>
+            </li>
+            :
+            <li>
+              <Link to="/signin">Sign in</Link>
+            </li>
+          }
         </ul>
       </nav>
     </div>

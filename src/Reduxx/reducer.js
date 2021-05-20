@@ -1,9 +1,12 @@
 import Cookies from "js-cookie";
 
+const id = Cookies.get('id');
+
 const initialState = {
-  userID: Cookies.get('id'),
+  userID: id,
   token: Cookies.get('token'),
-  data: []
+  data: [],
+  check: id ? true : false
 };
 
 const useReducer = (state = initialState, action) => {
@@ -14,7 +17,8 @@ const useReducer = (state = initialState, action) => {
         ...state,
         userID: action.data.user.id,
         token: action.data.jwt,
-        data: action.data
+        data: action.data,
+        check: action.check
       }
       default:
         return state;

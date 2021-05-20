@@ -31,6 +31,8 @@ const Home = () => {
     .then(response => response.json())
     .then(textToPost => {
       console.log(textToPost);
+      messageGetFetch();
+      
     })
   };
 
@@ -55,23 +57,21 @@ const Home = () => {
   useEffect(() => {
     messageGetFetch();
   },[]);
+  
   return (
-    <div>
-      <h1>Home</h1>
-      <form onSubmit={messagePostFetch}>
-        <label>
-          Message :
-          <input type="text" name="text" onChange={handleChange} />
-        </label>
+    <div className="container">
+      <span id="title">Home</span>
+      <form onSubmit={messagePostFetch} id="home">
+        <input type="text" name="text" onChange={handleChange} placeholder="What's up ?"/>
         <button>Submit</button>
       </form>
-      <h3>{data && data.length} posts</h3>
-      <ul>
+      <span id="postsCount">{data && data.length} posts</span>
+      <ul className="allPosts">
         {data && data.map((post) => {
           return (
             <li key={post.id}>
+              <Link to={`/users/${post.user.id}`}>{post.user.username}</Link>
               <p>{post.text}</p>
-              by <Link to={`/users/${post.user.id}`}>{post.user.username}</Link>
             </li>
             )
           })

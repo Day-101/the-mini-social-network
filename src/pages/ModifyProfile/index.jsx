@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
+import { useHistory } from 'react-router';
 
 const ModifyProfile = () => {
 
   const {token, userID} = useSelector(state => state);
+  const history = useHistory();
 
   const [userInfo, setUserInfo] = useState('');
   
@@ -27,7 +29,7 @@ const ModifyProfile = () => {
 
   //****************************** */
 
-  const [data, setData] = useState({
+  const [dataD, setData] = useState({
     username: '',
     email: '',
     password: ''
@@ -36,7 +38,7 @@ const ModifyProfile = () => {
   
   const handleChange = (e) => {
     setData({
-      ...data,
+      ...dataD,
       [e.target.name]: e.target.value
     })
   };
@@ -50,18 +52,21 @@ const ModifyProfile = () => {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(dataD)
     })
     .then(response => response.json())
     .then(data => {
       console.log(data);
+      profileFetch();
+      history.push('/users/me');
     })
   };
-
+  console.log(dataD);
+  
 
 
   return (
-    <div>
+    <div className="container">
       <div>
         <h1>Modify Profile</h1>
         <p>{userInfo.username}</p>

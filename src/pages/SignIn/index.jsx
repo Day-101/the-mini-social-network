@@ -36,7 +36,7 @@ const SignIn = () => {
     })
     .then(response => response.json())
     .then(data => {
-      dispatch(newUserSuccess(data))
+      dispatch(newUserSuccess(data, true))
       Cookies.set('token', data.jwt);
       Cookies.set('id', data.user.id);
       history.push('/');
@@ -44,18 +44,22 @@ const SignIn = () => {
   };
 
   return (
-    <form onSubmit={SignInFetch}>
-      <h3>Sign in</h3>
-      <label>
-        Username or Email :
-        <input type="text" name="identifier" onChange={handleChange}/>
-      </label>
-      <label>
-        Password :
-        <input type="password" name="password" onChange={handleChange} />
-      </label>
-      <input type="submit" value="Submit" />
-    </form>
+    <div className="container">
+      <span id="title">Sign in</span>
+      <form onSubmit={SignInFetch} id="form-container">
+        <div id="form-content">
+          <label>
+            Username or Email :
+          </label>
+          <input type="text" name="identifier" onChange={handleChange}/>
+          <label>
+            Password :
+          </label>
+          <input type="password" name="password" onChange={handleChange} />
+          <input type="submit" value="Submit" />
+        </div>
+      </form>
+    </div>
   );
 };
 

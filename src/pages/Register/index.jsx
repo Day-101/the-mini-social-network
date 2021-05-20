@@ -34,22 +34,26 @@ const Register = () => {
   };
 
   return (
-    <form onSubmit={registerFetch}>
-      <h3>Register</h3>
-      <label htmlFor="username">
-        Username :
-        <input type="text" name="username" onChange={handleChange}/>
-      </label>
-      <label>
-        Email :
-        <input type="text" name="email" onChange={handleChange} />
-      </label>
-      <label>
-        Password :
-        <input type="password" name="password" onChange={handleChange} />
-      </label>
-      <input type="submit" value="Submit" />
-    </form>
+    <div className="container">
+      <span id="title">Register</span>
+      <form onSubmit={registerFetch} id="form-container">
+        <div id="form-content">
+          <label htmlFor="username">
+            Username :
+          </label>
+            <input type="text" name="username" onChange={handleChange}/>
+          <label>
+            Email :
+          </label>
+            <input type="email" name="email" onChange={handleChange} />
+          <label>
+            Password :
+          </label>
+            <input type="password" name="password" onChange={handleChange} />
+          <input type="submit" value="Submit" />
+        </div>
+      </form>
+    </div>
   );
 };
 

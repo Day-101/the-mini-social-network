@@ -57,17 +57,19 @@ const Profile = () => {
     })
     .then(response => response.json())
     .then(data => {
-      setData(data);
+      messageGetFetch();
     })
-  }
+  };
  
   return (
-    <div>
+    <div className="container">
+      <span id="title">Profile</span>
       <div>
-        <h1>Profile</h1>
+        <h3>Username</h3>
         <p>{userInfo.username}</p>
-        <p>{userInfo.id}</p>
+        <h3>Email</h3>
         <p>{userInfo.email}</p>
+        <h3>Description</h3>
         <p>{userInfo.description}</p>
         <Link to="/users/me/modify">Modify</Link>
       </div>
@@ -78,7 +80,7 @@ const Profile = () => {
             return (
               <li key={post.id}>
                 <p>{post.text}</p>
-                <button onClick={handleClic(post.id)}>Delete</button>
+                <button onClick={() => handleClic(post.id)}>Delete</button>
               </li>
               )
             })
