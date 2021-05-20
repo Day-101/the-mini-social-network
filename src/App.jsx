@@ -3,6 +3,8 @@ import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Profile from './pages/Profile';
+import ModifyProfile from './pages/ModifyProfile';
+import UserProfile from './pages/UserProfile';
 import Register from './pages/Register';
 import SignIn from './pages/SignIn';
 import './sass/style.scss';
@@ -16,8 +18,14 @@ const App = () => {
         <Route path="/" exact>
           <Home />
         </Route>
-        <Route path="/users/me">
+        <Route path="/users/me" exact>
           <Profile />
+        </Route>
+        <Route path="/users/me/modify">
+          <ModifyProfile />
+        </Route>
+        <Route path="/users/:slug">
+          <UserProfile />
         </Route>
         <Route path="/register">
           <Register />

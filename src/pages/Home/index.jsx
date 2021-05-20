@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
 
 const Home = () => {
  const {userID, token} = useSelector(state => state);
@@ -10,7 +11,7 @@ const Home = () => {
   });
 
   const handleChange = (e) => {
-    setData({
+    setTextToPost({
       ...textToPost,
       [e.target.name]: e.target.value
     })
@@ -33,26 +34,27 @@ const Home = () => {
     })
   };
 
-  const [data, setData] = useState({
-    text: '',
-    user: userID
-  });
+  // ***************************************************
+
+  const [data, setData] = useState();
 
   const messageGetFetch = () => {
     fetch('http://localhost:1337/posts', {
       method: 'get',
       headers: {
-        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
     })
     .then(response => response.json())
     .then(data => {
+      setData(data);
       console.log(data);
     })
   };
-  messageGetFetch()
-  
+
+  useEffect(() => {
+    messageGetFetch();
+  },[]);
   return (
     <div>
       <h1>Home</h1>
@@ -63,18 +65,18 @@ const Home = () => {
         </label>
         <button>Submit</button>
       </form>
-
+      <h3>{data && data.length} posts</h3>
       <ul>
-        {messageGetFetch().map(post => 
-          <li>
-            post
-          </li>
-        )}
-        <li>
-          
-        </li>
+        {data && data.map((post) => {
+          return (
+            <li key={post.id}>
+              <p>{post.text}</p>
+              by <Link to={`/users/${post.user.id}`}>{post.user.username}</Link>
+            </li>
+            )
+          })
+        }
       </ul>
-
     </div>
   );
 };
